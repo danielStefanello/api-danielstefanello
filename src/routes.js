@@ -4,7 +4,10 @@ import multer from 'multer';
 import multerConfig from './config/multer';
 
 import UserController from './app/controllers/UserController';
+import ClientController from './app/controllers/ClientController';
 import SessionController from './app/controllers/SessionController';
+import TechController from './app/controllers/TechController';
+import CategoryController from './app/controllers/CategoryController';
 import JobController from './app/controllers/JobController';
 import ImageController from './app/controllers/ImageController';
 
@@ -15,12 +18,18 @@ const upload = multer(multerConfig);
 
 routes.get('/jobs', JobController.index);
 routes.get('/jobs/:job_id', JobController.show);
+routes.get('/categories', CategoryController.index);
+routes.get('/techs', TechController.index);
+routes.get('/clients', ClientController.index);
 
 routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware);
 
 routes.post('/users', UserController.store);
+routes.post('/clients', ClientController.store);
+routes.post('/techs', TechController.store);
+routes.post('/categories', CategoryController.store);
 routes.post('/jobs', JobController.store);
 routes.post(
   '/jobs/:job_id/files',

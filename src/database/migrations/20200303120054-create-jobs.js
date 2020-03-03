@@ -11,25 +11,16 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      thumbnail: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       description: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      category: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      techs: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      client: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      client_id: {
+        type: Sequelize.INTEGER,
+        references: { model: 'clients', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
+        allowNull: true,
       },
       user_id: {
         type: Sequelize.INTEGER,

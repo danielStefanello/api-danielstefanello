@@ -35,6 +35,14 @@ class ImageController {
   }
 
   async update(req, res) {
+    const schema = Yup.object().shape({
+      active: Yup.boolean(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
     const { image_id } = req.params;
 
     const image = await Image.findByPk(image_id);

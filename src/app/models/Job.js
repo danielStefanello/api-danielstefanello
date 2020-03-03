@@ -5,11 +5,7 @@ class Job extends Model {
     super.init(
       {
         title: Sequelize.STRING,
-        thumbnail: Sequelize.STRING,
         description: Sequelize.STRING,
-        category: Sequelize.STRING,
-        techs: Sequelize.STRING,
-        client: Sequelize.STRING,
         active: Sequelize.BOOLEAN,
       },
       {
@@ -22,7 +18,18 @@ class Job extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id', as: 'user' });
+    this.belongsTo(models.Client, { foreignKey: 'client_id', as: 'client' });
     this.hasMany(models.Image, { foreignKey: 'job_id', as: 'images' });
+    this.belongsToMany(models.Tech, {
+      foreignKey: 'job_id',
+      through: 'job_techs',
+      as: 'techs',
+    });
+    this.belongsToMany(models.Category, {
+      foreignKey: 'job_id',
+      through: 'job_categories',
+      as: 'categories',
+    });
   }
 }
 
