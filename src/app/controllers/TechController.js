@@ -27,6 +27,26 @@ class TechController {
 
     return res.json(tech);
   }
+
+  async update(req, res) {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
+    const tech = await Tech.findByPk(req.params.tech_id);
+
+    if (!tech) {
+      return res.status(400).json({ error: 'Technology not found' });
+    }
+
+    const { id, name } = await tech.update(req.body);
+
+    return res.json({ id, name });
+  }
 }
 
 export default new TechController();

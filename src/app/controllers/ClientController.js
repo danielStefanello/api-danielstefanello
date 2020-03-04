@@ -29,6 +29,26 @@ class ClientController {
 
     return res.json(client);
   }
+
+  async update(req, res) {
+    const schema = Yup.object().shape({
+      name: Yup.string().required(),
+    });
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Validation fails' });
+    }
+
+    const client = await Client.findByPk(req.params.client_id);
+
+    if (!client) {
+      return res.status(400).json({ error: 'Client not found' });
+    }
+
+    const { id, name } = await client.update(req.body);
+
+    return res.json({ id, name });
+  }
 }
 
 export default new ClientController();

@@ -38,6 +38,9 @@ routes.post(
 );
 
 routes.put('/users', UserController.update);
+routes.put('/clients/:client_id', ClientController.update);
+routes.put('/categories/:category_id', CategoryController.update);
+routes.put('/techs/:tech_id', TechController.update);
 routes.put('/jobs/:job_id', JobController.update);
 routes.put('/images/:image_id', ImageController.update);
 
