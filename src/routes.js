@@ -24,9 +24,9 @@ routes.get('/clients', ClientController.index);
 
 routes.post('/sessions', SessionController.store);
 
+routes.post('/users', UserController.store);
 routes.use(authMiddleware);
 
-routes.post('/users', UserController.store);
 routes.post('/clients', ClientController.store);
 routes.post('/techs', TechController.store);
 routes.post('/categories', CategoryController.store);

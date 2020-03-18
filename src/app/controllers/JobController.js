@@ -13,7 +13,8 @@ class JobController {
         },
         {
           association: 'images',
-          required: false,
+          // Next line allow vizualization job without images
+          // required: false,
           where: { active: true },
           attributes: ['id', 'path', 'active'],
         },
@@ -41,6 +42,7 @@ class JobController {
     const { job_id } = req.params;
 
     const job = await Job.findByPk(job_id, {
+      where: { active: true },
       attributes: ['id', 'title', 'description', 'active', 'user_id'],
       include: [
         {
@@ -49,6 +51,7 @@ class JobController {
         },
         {
           association: 'images',
+          where: { active: true },
           attributes: ['id', 'path', 'active'],
         },
         {
@@ -137,7 +140,25 @@ class JobController {
       return res.status(400).json({ error: 'Job not found' });
     }
 
-    const new_job = await job.update(req.body);
+    const {
+      title,
+      description,
+      client_id,
+      categories,
+      techs,
+      active,
+    } = req.body;
+
+    const new_job = await job.update({
+      title,
+      description,
+      client_id,
+      active,
+    });
+
+    await job.addCategory(categories);
+
+    await job.addTech(techs);
 
     return res.json(new_job);
   }
