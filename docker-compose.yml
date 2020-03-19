@@ -1,0 +1,42 @@
+version: "3.3"
+
+services:
+
+  traefik:
+    image: "traefik:v2.0.0-rc3"
+    container_name: "traefik"
+    command:
+      - "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+
+  postgres:
+    image: "postgres:11.5"
+    container_name: "postgres"
+    volumes:
+      - ../dbdata:/var/lib/postgres:ro
+    environment:
+      - "POSTGRESQL_USER=danielpgs"
+      - "POSTGRESQL_PASS=danielpgs"
+      - "POSTGRESQL_DB=danielstefanello"
+    labels:
+      - "traefik.enable=true"
+
+  api:
+    build: .
+    container_name: "api"
+    command: "yarn start"
+    depends_on:
+      - "postgres"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.site.rule=Host(`api.danielstefanello.com.br`)"
+      - "traefik.http.routers.site.entrypoints=web"
