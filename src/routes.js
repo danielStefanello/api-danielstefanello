@@ -3,6 +3,7 @@ import multer from 'multer';
 
 import multerConfig from './config/multer';
 
+import ApiController from './app/controllers/ApiController';
 import UserController from './app/controllers/UserController';
 import ClientController from './app/controllers/ClientController';
 import SessionController from './app/controllers/SessionController';
@@ -16,6 +17,7 @@ import authMiddleware from './app/middlewares/auth';
 const routes = new Router();
 const upload = multer(multerConfig);
 
+routes.get('/', ApiController.index);
 routes.get('/jobs', JobController.index);
 routes.get('/jobs/:job_id', JobController.show);
 routes.get('/categories', CategoryController.index);
@@ -24,9 +26,9 @@ routes.get('/clients', ClientController.index);
 
 routes.post('/sessions', SessionController.store);
 
-routes.post('/users', UserController.store);
 routes.use(authMiddleware);
 
+routes.post('/users', UserController.store);
 routes.post('/clients', ClientController.store);
 routes.post('/techs', TechController.store);
 routes.post('/categories', CategoryController.store);
