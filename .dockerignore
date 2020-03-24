@@ -1,0 +1,5 @@
+node_modules
+src
+.env_example
+Dockerfile
+docker-compose.yml
