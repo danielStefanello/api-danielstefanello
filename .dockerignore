@@ -1,5 +1,10 @@
 node_modules
 src
+.editorconfig
 .env_example
-Dockerfile
+.eslintrc.js
+.gitignore
+.prettierrc
 docker-compose.yml
+Dockerfile
+nodemon.json
