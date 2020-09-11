@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3333
 
-CMD ["yarn", "build", "yarn", "build"]
+CMD ["yarn", "build", "yarn", "start"]
