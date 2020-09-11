@@ -10,6 +10,6 @@ COPY . .
 
 EXPOSE 3333
 
-CMD ["yarn", "build"]
+RUN yarn build
 
-ENTRYPOINT ["yarn start"]
+CMD ["yarn", "build"]
