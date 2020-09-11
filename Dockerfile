@@ -12,4 +12,4 @@ EXPOSE 3333
 
 RUN yarn build
 
-CMD ["yarn", "build"]
+CMD ["yarn", "start"]
