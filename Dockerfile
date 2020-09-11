@@ -6,10 +6,10 @@ COPY package.json yarn.lock ./
 
 RUN yarn
 
-COPY . .
-
 EXPOSE 3333
 
-# RUN yarn build
+COPY . .
+
+RUN yarn build
 
 CMD ["yarn", "dev"]

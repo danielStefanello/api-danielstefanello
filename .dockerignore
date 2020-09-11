@@ -1,10 +1,10 @@
 node_modules
-src
-.editorconfig
-.env_example
-.eslintrc.js
-.gitignore
-.prettierrc
-docker-compose.yml
-Dockerfile
-nodemon.json
+# src
+# .editorconfig
+# .env_example
+# .eslintrc.js
+# .gitignore
+# .prettierrc
+# docker-compose.yml
+# Dockerfile
+# nodemon.json
