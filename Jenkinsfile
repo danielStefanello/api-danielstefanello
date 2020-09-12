@@ -13,6 +13,12 @@ docker run --name api-danielstefanello -d --expose 3333 --network web -e VIRTUAL
       }
     }
 
+    stage('Migrations') {
+      steps {
+        sh 'yarn sequelize db:migrate'
+      }
+    }
+
   }
   environment {
     APP_URL = 'https://api.danielstefanello.com.br/'
