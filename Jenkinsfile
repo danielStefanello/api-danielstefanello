@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh '''docker build -t api-danielstefanello
+        sh '''docker build -t api-danielstefanello .
 
 if [ "$(docker ps -aq -f name=api-danielstefanello)" ]; then
   docker rm -f api-danielstefanello
